@@ -271,7 +271,7 @@ Updating 阶段
 Unmounting 阶段
 - componentWillUnmount() 在组件从DOM中移除时被调用
 
-## refs 和 DOM
+## Refs 和 DOM
 `虚拟 DOM`
 - 组件只是存在于内存中的一种数据结构，叫做虚拟 DOM，只有插入文档后，才会变成
 - 真实的 DOM。所有的 DOM 变动，都先在虚拟 DOM 上发生，然后再将实际发生变动的部分，反映在真实 DOM上，这叫做 DOM diff 算法，极大的提高网页性能。
@@ -321,26 +321,22 @@ class MyInput extends Component {
 ```
 - 在函数式组件中使用 ref
     不能在函数式组件上使用 ref 属性，因为它们没有实例
+    ```js
+        function MyFunctionalComponent() {
+          return <input />;
+        }
 
-注意：
-- 只有虚拟DOM插入到文档后，才能使用这个属性
--
-- 
-```js
-function MyFunctionalComponent() {
-  return <input />;
-}
+        class Parent extends React.Component {
+          render() {
+            // 这里 *不会* 执行！
+            return (
+              <MyFunctionalComponent
+                ref={(input) => { this.textInput = input; }} />
+            );
+          }
+        }
+      ```
 
-class Parent extends React.Component {
-  render() {
-    // 这里 *不会* 执行！
-    return (
-      <MyFunctionalComponent
-        ref={(input) => { this.textInput = input; }} />
-    );
-  }
-}
-```
 
 ### React创建组件的三种方式及其区别
     [详细](http://www.cnblogs.com/wonyun/p/5930333.html)
