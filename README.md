@@ -5,8 +5,8 @@ react学习笔记
 `新建项目`
 ```js
 npm install -g create-react-app
-```
 create-react-app [项目名]
+```
 `启动项目`
 ```js
 cd [项目名]
@@ -59,10 +59,10 @@ class Welcome extends React.Component {
 }
 ```
 注意：
-1.组件类中只能包含一个顶层标签，否则会报错
-2.添加组件属性，class 属性需要写成 className, for 属性需要写成 htmlFor
+- 1.组件类中只能包含一个顶层标签，否则会报错
+- 2.添加组件属性，class 属性需要写成 className, for 属性需要写成 htmlFor
 因为 class, for 是 javascript 的保留字
-```
+```js
 <label className="label" htmlFor="username"></label>
 ```
 3.组件名首字母必须大写
@@ -70,7 +70,7 @@ class Welcome extends React.Component {
 ## props
 - this.props 对象的属性与组件的属性一一对应
 - this.props.children 表示组件的所有的子节点
-```
+```js
 class Welcome extends Component {
     render () {
         return (
