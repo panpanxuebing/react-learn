@@ -3,24 +3,25 @@ react学习笔记
 
 ## react 脚手架 create-react-app
 `新建项目`
-```js
-npm install -g create-react-app
-create-react-app [项目名]
-```
+
+npm install -g create-react-app  
+create-react-app [项目名]  
+
 `启动项目`
-```js
-cd [项目名]
-npm start
-```
+
+cd [项目名]  
+npm start  
 
 ## ReactDOM.render()
 ReactDOM.render 是 React 的最基本方法，用于将模板转为 HTML 语言，并插入指定的 DOM 节点。
+
 ```js
 ReactDOM.render(
     <div>Hello React</div>,
     document.getElementById('root')
 );
 ```
+
 ## JSX 语法
 JSX 语法中 HTML 语言可以直接写在 JavaScript 语言之中，不加任何引号，允许 HTML 与 Javascript 混写
 基本规则：遇到 HTML 标签（以 < 开头），就用 HTML 规则解析；遇到代码块（以 { 开头），就用 JavaScript 规则解析
@@ -89,6 +90,28 @@ ReactDOM.render(
     document.getElementById('root')
 );
 ```
+- this.props.children 可以被传入任务数据，包括回调函数
+```js
+class Repeat extends Component {
+    render () {
+        let items = [];
+        for (let i = 0; i < this.props.numtimes; i++) {
+            items.push(this.props.children(i));
+        }
+        return <ul>{ items }</ul>
+    }
+}
+
+class ListOfTenThings extends Component {
+    render () {
+        return (
+            <Repeat numtimes={ 10 }>
+                { (index) => <li key={ index }>this is item { index } in the list</li> }
+            </Repeat>
+        )
+    }
+}
+```
 - props 的只读性
 所有的React组件必须像纯函数那样使用它们的props。
 纯函数概念：
@@ -102,8 +125,9 @@ function sum(a, b) {
 ## PropTypes
 组件的 PropTypes 属性用来验证别人使用组件时，提供的参数是否符合要求。
 
-
-注意：用 class 定义的类中 propTypes 要移到外部来
+注意：
+- 用 class 定义的类中 propTypes 要移到外部来
+- 从 React v15.5 开始 ，React.PropTypes 助手函数已被弃用，我们建议使用 prop-types 库 来定义contextTypes。
 ```js
 import PropTypes from 'prop-types'
 class MyTitle extends Component {
@@ -113,68 +137,101 @@ class MyTitle extends Component {
         )
     }
 }
-
 MyTitle.propTypes = {
-    // 可以声明 prop 为指定的 JS 基本数据类型，默认情况，这些数据是可选的
-    optionalArray: React.PropTypes.array,
-    optionalBool: React.PropTypes.bool,
-    optionalFunc: React.PropTypes.func,
-    optionalNumber: React.PropTypes.number,
-    optionalObject: React.PropTypes.object,
-    optionalString: React.PropTypes.string,
- 
-    // 可以被渲染的对象 numbers, strings, elements 或 array
-    optionalNode: React.PropTypes.node,
- 
-    //  React 元素
-    optionalElement: React.PropTypes.element,
- 
-    // 用 JS 的 instanceof 操作符声明 prop 为类的实例。
-    optionalMessage: React.PropTypes.instanceOf(Message),
- 
-    // 用 enum 来限制 prop 只接受指定的值。
-    optionalEnum: React.PropTypes.oneOf(['News', 'Photos']),
- 
-    // 可以是多个对象类型中的一个
-    optionalUnion: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number,
-      React.PropTypes.instanceOf(Message)
-    ]),
- 
-    // 指定类型组成的数组
-    optionalArrayOf: React.PropTypes.arrayOf(React.PropTypes.number),
- 
-    // 指定类型的属性构成的对象
-    optionalObjectOf: React.PropTypes.objectOf(React.PropTypes.number),
- 
-    // 特定 shape 参数的对象
-    optionalObjectWithShape: React.PropTypes.shape({
-      color: React.PropTypes.string,
-      fontSize: React.PropTypes.number
-    }),
- 
-    // 任意类型加上 `isRequired` 来使 prop 不可空。
-    requiredFunc: React.PropTypes.func.isRequired,
- 
-    // 不可空的任意类型
-    requiredAny: React.PropTypes.any.isRequired,
- 
-    // 自定义验证器。如果验证失败需要返回一个 Error 对象。不要直接使用 `console.warn` 或抛异常，因为这样 `oneOfType` 会失效。
-    customProp: function(props, propName, componentName) {
-        if (!/matchme/.test(props[propName])) {
-            return new Error('Validation failed!');
-        }
-    }
+    name: PropTypes.string
 }
-
-
 var data = 123;
 
 ReactDOM.render(
   <MyTitle title={data} />,
   document.body
 );
+```
+
+`默认的prop值`
+propTypes 的类型检测是在defaultProps 解析之后发生的，因此也会对默认属性 defaultProps 进行类型检测。
+```js
+MyTitle.defaultProps = {
+    name: 'Stranger'
+};
+```
+
+`不同的验证器：`
+```js
+import PropTypes from 'prop-types';
+
+MyComponent.propTypes = {
+  // 你可以声明一个 prop 是一个特定的 JS 原始类型。 
+  // 默认情况下，这些都是可选的。
+  optionalArray: PropTypes.array,
+  optionalBool: PropTypes.bool,
+  optionalFunc: PropTypes.func,
+  optionalNumber: PropTypes.number,
+  optionalObject: PropTypes.object,
+  optionalString: PropTypes.string,
+  optionalSymbol: PropTypes.symbol,
+
+  // 任何东西都可以被渲染:numbers, strings, elements,或者是包含这些类型的数组(或者是片段)。
+  optionalNode: PropTypes.node,
+
+  // 一个 React 元素。
+  optionalElement: PropTypes.element,
+
+  // 你也可以声明一个 prop 是类的一个实例。 
+  // 使用 JS 的 instanceof 运算符。
+  optionalMessage: PropTypes.instanceOf(Message),
+
+  // 你可以声明 prop 是特定的值，类似于枚举
+  optionalEnum: PropTypes.oneOf(['News', 'Photos']),
+
+  // 一个对象可以是多种类型其中之一
+  optionalUnion: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceOf(Message)
+  ]),
+
+  // 一个某种类型的数组
+  optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
+
+  // 属性值为某种类型的对象
+  optionalObjectOf: PropTypes.objectOf(PropTypes.number),
+
+  // 一个特定形式的对象
+  optionalObjectWithShape: PropTypes.shape({
+    color: PropTypes.string,
+    fontSize: PropTypes.number
+  }),
+
+  // 你可以使用 `isRequired' 链接上述任何一个，以确保在没有提供 prop 的情况下显示警告。
+  requiredFunc: PropTypes.func.isRequired,
+
+  // 任何数据类型的值
+  requiredAny: PropTypes.any.isRequired,
+
+  // 你也可以声明自定义的验证器。如果验证失败返回 Error 对象。不要使用 `console.warn` 或者 throw ，
+  // 因为这不会在 `oneOfType` 类型的验证器中起作用。
+  customProp: function(props, propName, componentName) {
+    if (!/matchme/.test(props[propName])) {
+      return new Error(
+        'Invalid prop `' + propName + '` supplied to' +
+        ' `' + componentName + '`. Validation failed.'
+      );
+    }
+  },
+
+  // 也可以声明`arrayOf`和`objectOf`类型的验证器，如果验证失败需要返回Error对象。
+  // 会在数组或者对象的每一个元素上调用验证器。验证器的前两个参数分别是数组或者对象本身，
+  // 以及当前元素的键值。
+  customArrayProp: PropTypes.arrayOf(function(propValue, key, componentName, location, propFullName) {
+    if (!/matchme/.test(propValue[key])) {
+      return new Error(
+        'Invalid prop `' + propFullName + '` supplied to' +
+        ' `' + componentName + '`. Validation failed.'
+      );
+    }
+  })
+};
 ```
 
 ## state
