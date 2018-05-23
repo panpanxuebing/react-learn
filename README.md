@@ -3,11 +3,15 @@ react学习笔记
 
 ## react 脚手架 create-react-app
 `新建项目`
+```
 npm install -g create-react-app
+```
 create-react-app [项目名]
 `启动项目`
+```
 cd [项目名]
 npm start
+```
 
 ## ReactDOM.render()
 ReactDOM.render 是 React 的最基本方法，用于将模板转为 HTML 语言，并插入指定的 DOM 节点。
