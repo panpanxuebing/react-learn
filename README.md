@@ -278,66 +278,63 @@ Unmounting 阶段
 
 `Ref`
 利用 ref 属性获取组件实例或DOM元素
-- 在类组件中的 React 元素上添加 ref，获取到 真实 DOM
-利用 refs 属性
-```js
-class MyInput extends Component {
+    - 在类组件中的 React 元素上添加 ref，获取到 真实 DOM
+        -利用 refs 属性
+        ```js
+        class MyInput extends Component {
 
-    handleClick = () => {
-        this.refs.textInput.focus();
-    }
+            handleClick = () => {
+                this.refs.textInput.focus();
+            }
 
-    render () {
-        return (
-            <div>
-                <input ref="textInput" />
-                <button onClick={ () => this.handleClick() }>Submit</button>
-            </div>
-            
-        )
-    }
-}
-```
+            render () {
+                return (
+                    <div>
+                        <input ref="textInput" />
+                        <button onClick={ () => this.handleClick() }>Submit</button>
+                    </div>
 
-ref 属性接受回调函数，ref 回调接受底层的DOM元素作为参数，组件 装载(mounted) 或者 卸载(unmounted) 之后，回调函数会立即执行，DOM元素作为的组件属性来获取。
-```js
-class MyInput extends Component {
-
-    handleClick = () => {
-        this.textInput.focus();
-    }
-
-    render () {
-        return (
-            <div>
-                <input ref={ (input) => { this.textInput = input } } />
-                <button onClick={ () => this.handleClick() }>Submit</button>
-            </div>
-            
-        )
-    }
-}
-
-```
-- 在函数式组件中使用 ref
-    不能在函数式组件上使用 ref 属性，因为它们没有实例
-    ```js
-        function MyFunctionalComponent() {
-          return <input />;
+                )
+            }
         }
+        ```
 
-        class Parent extends React.Component {
-          render() {
-            // 这里 *不会* 执行！
-            return (
-              <MyFunctionalComponent
-                ref={(input) => { this.textInput = input; }} />
-            );
-          }
-        }
-    ```
+        - 利用 ref 属性接受回调函数，ref 回调接受底层的DOM元素作为参数，组件 装载(mounted) 或者 卸载(unmounted) 之后，回调函数会立即执行，DOM元素         作为的组件属性来获取。
+        ```js
+            class MyInput extends Component {
 
+                handleClick = () => {
+                    this.textInput.focus();
+                }
 
+                render () {
+                    return (
+                        <div>
+                            <input ref={ (input) => { this.textInput = input } } />
+                            <button onClick={ () => this.handleClick() }>Submit</button>
+                        </div>
+
+                    )
+                }
+            }
+        ```
+    - 在函数式组件中使用 ref
+        - 不能在函数式组件上使用 ref 属性，因为它们没有实例
+        ```js
+            function MyFunctionalComponent() {
+              return <input />;
+            }
+
+            class Parent extends React.Component {
+              render() {
+                // 这里 *不会* 执行！
+                return (
+                  <MyFunctionalComponent
+                    ref={(input) => { this.textInput = input; }} />
+                );
+              }
+            }
+        ```
 ### React创建组件的三种方式及其区别
     [详细](http://www.cnblogs.com/wonyun/p/5930333.html)
 
