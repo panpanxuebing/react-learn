@@ -305,6 +305,7 @@ class MyInput extends Component {
 注意：
 - 只有虚拟DOM插入到文档后，才能使用这个属性
 - 不能在函数式组件上使用 ref 属性，因为它们没有实例
+- 
 ```js
 function MyFunctionalComponent() {
   return <input />;
@@ -322,6 +323,10 @@ class Parent extends React.Component {
 ```
 
 ### [React创建组件的三种方式及其区别](http://www.cnblogs.com/wonyun/p/5930333.html)
+
+
+### react事件绑定的三种方法
+
 
 ### 参照：
 - React 入门实例教程：http://www.ruanyifeng.com/blog/2015/03/react.html
