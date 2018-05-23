@@ -321,7 +321,8 @@ class Parent extends React.Component {
 }
 ```
 
-### [React创建组件的三种方式及其区别](http://www.cnblogs.com/wonyun/p/5930333.html)
+### React创建组件的三种方式及其区别
+    [详细](http://www.cnblogs.com/wonyun/p/5930333.html)
 
 ### 参照：
 - React 入门实例教程：http://www.ruanyifeng.com/blog/2015/03/react.html
