@@ -335,7 +335,7 @@ class MyInput extends Component {
             );
           }
         }
-      ```
+    ```
 
 
 ### React创建组件的三种方式及其区别
