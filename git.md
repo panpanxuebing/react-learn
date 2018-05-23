@@ -21,5 +21,8 @@
     git rm
     git rm -f 强制移除
 
+### 推送
+    git push origin master
+
 ### 拉取
     git pull
