@@ -272,16 +272,57 @@ Unmounting 阶段
 - componentWillUnmount() 在组件从DOM中移除时被调用
 
 ## 获取真实的DOM节点
-虚拟 DOM
+`虚拟 DOM`
 - 组件只是存在于内存中的一种数据结构，叫做虚拟 DOM，只有插入文档后，才会变成
 - 真实的 DOM。所有的 DOM 变动，都先在虚拟 DOM 上发生，然后再将实际发生变动的部分，反映在真实 DOM上，这叫做 DOM diff 算法，极大的提高网页性能。
 
-获取 真实DOM
-- 现在虚拟DOM上添加 ref 属性，然后通过 this.refs.[refName] 就会返回真实的 DOM 节点
+`获取 真实DOM - Ref`
+在虚拟DOM上添加 ref 属性，有两种方法可以获取到真实DOM
+- this.refs.[refName] 就会返回真实的 DOM 节点
+```js
+class MyInput extends Component {
+
+    handleClick = () => {
+        this.refs.textInput.focus();
+    }
+
+    render () {
+        return (
+            <div>
+                <input ref="textInput" />
+                <button onClick={ () => this.handleClick() }>Submit</button>
+            </div>
+            
+        )
+    }
+}
+```
+- ref 属性接受回调函数，ref 回调接受底层的DOM元素作为参数，组件 装载(mounted) 或者 卸载(unmounted) 之后，回调函数会立即执行，DOM元素作为的组件属性来获取。
+```js
+<input ref={ (input) => { this.textInput = input } } />
+```
 
 注意：
 - 只有虚拟DOM插入到文档后，才能使用这个属性
+- 不能在函数式组件上使用 ref 属性，因为它们没有实例
+```js
+function MyFunctionalComponent() {
+  return <input />;
+}
 
-## 参照：
+class Parent extends React.Component {
+  render() {
+    // 这里 *不会* 执行！
+    return (
+      <MyFunctionalComponent
+        ref={(input) => { this.textInput = input; }} />
+    );
+  }
+}
+```
+
+### [React创建组件的三种方式及其区别](http://www.cnblogs.com/wonyun/p/5930333.html)
+
+### 参照：
 - React 入门实例教程：http://www.ruanyifeng.com/blog/2015/03/react.html
 - React DOM diff 算法：https://calendar.perfplanet.com/2013/diff/
