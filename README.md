@@ -340,7 +340,7 @@ Unmounting 阶段
 
 
 ### react事件绑定的三种方法
-    [详细](https://blog.csdn.net/qq_18661257/article/details/62443986)
+    详细：https://blog.csdn.net/qq_18661257/article/details/62443986
 
 ### 参照：
 - React 入门实例教程：http://www.ruanyifeng.com/blog/2015/03/react.html
