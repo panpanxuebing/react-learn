@@ -278,7 +278,27 @@ Unmounting 阶段
 
 `Ref`
 利用 ref 属性获取组件实例或DOM元素
-- ref 属性接受回调函数，ref 回调接受底层的DOM元素作为参数，组件 装载(mounted) 或者 卸载(unmounted) 之后，回调函数会立即执行，DOM元素         作为的组件属性来获取。
+- 使用 React.createRef 创建 refs
+```js
+class MyComponent extends Component {
+    constructor (props) {
+        super(props);
+        this.myRef = React.createRef();
+    }
+
+    render () {
+        return 
+            <div ref={ this.myRef }></div>
+    }
+}
+```
+- 访问 Refs
+通过 ref 的 current 属性
+```js
+const node = this.myref.current
+```
+
+- ref 属性接受回调函数，ref 回调接受底层的DOM元素作为参数，组件 装载(mounted) 或者 卸载(unmounted) 之后，回调函数会立即执行，DOM元素作为的组件属性来获取。
 ```js
     class MyInput extends Component {
 
@@ -313,6 +333,7 @@ Unmounting 阶段
       }
     }
 ```
+- 
 ### React创建组件的三种方式及其区别
     [详细](http://www.cnblogs.com/wonyun/p/5930333.html)
 
@@ -321,5 +342,6 @@ Unmounting 阶段
     [详细](https://blog.csdn.net/qq_18661257/article/details/62443986)
 
 ### 参照：
-- React 入门实例教程：http://www.ruanyifeng.com/blog/2015/03/react.html
-- React DOM diff 算法：https://calendar.perfplanet.com/2013/diff/
+- [React 入门实例教程](http://www.ruanyifeng.com/blog/2015/03/react.html)
+- [React DOM diff 算法](https://calendar.perfplanet.com/2013/diff/)
+- [React 中文文档](https://doc.react-china.org/)
