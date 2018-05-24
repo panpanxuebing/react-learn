@@ -28,16 +28,16 @@
     git pull
 
 ### 生成 SSH 公钥
-    - 生成公钥
+    生成公钥
     $ ssh.keygen
-    - 查看保存公钥的位置
-    ``` js
+    查看保存公钥的位置
+    ```js
     cd ~/.ssh
     ls
     ```
-    - 会看到以下两个文件 id_rsa 保存的是私钥， id_rsa.pub 保存的是公钥
+    会看到以下两个文件 id_rsa 保存的是私钥， id_rsa.pub 保存的是公钥
     id_rsa id_rsa.pub
-    - 我们只需要公钥
+    我们只需要公钥
     cd id_rsa.pub
-    - 复制公钥，在个人的git账号的设置里，添加新的 SSH keys, 把复制的公钥粘贴进去，保存就好
+    复制公钥，在个人的git账号的设置里，添加新的 SSH keys, 把复制的公钥粘贴进去，保存就好
     
