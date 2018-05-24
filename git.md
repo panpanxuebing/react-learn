@@ -27,7 +27,7 @@
 ### 拉取
     git pull
 
-### 生成 SSH 公钥
+## 生成 SSH 公钥
     生成公钥
     $ ssh.keygen
     查看保存公钥的位置
