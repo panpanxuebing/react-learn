@@ -333,7 +333,27 @@ const node = this.myref.current
       }
     }
 ```
-- 
+- 你可以在组件间传递回调形式的 refs，就像你可以传递通过 React.createRef() 创建的对象 refs 一样。
+```js
+function CustomTextInput(props) {
+  return (
+    <div>
+      <input ref={props.inputRef} />
+    </div>
+  );
+}
+
+class Parent extends React.Component {
+  render() {
+    return (
+      <CustomTextInput
+        inputRef={el => this.inputElement = el}
+      />
+    );
+  }
+}
+```
+
 ### React创建组件的三种方式及其区别
     [详细](http://www.cnblogs.com/wonyun/p/5930333.html)
 
